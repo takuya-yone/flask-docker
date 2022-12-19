@@ -22,7 +22,6 @@ spec:
         name: fastapi-dep
         ports:
         - containerPort: 8000
-        resources: {}
         resources:
           limits:
             cpu: "0.1"
@@ -76,22 +75,22 @@ spec:
   selector:
     app: fastapi-dep
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: fastapi-alb
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-spec:
-  ingressClassName: alb
-  rules:
-    - http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: fastapi-svc
-              port:
-                number: 80
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: fastapi-alb
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+# spec:
+#   ingressClassName: alb
+#   rules:
+#     - http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: fastapi-svc
+#               port:
+#                 number: 80
