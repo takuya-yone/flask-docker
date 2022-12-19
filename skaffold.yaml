@@ -1,0 +1,32 @@
+# apiVersion: skaffold/v4beta1
+# kind: Config
+# metadata:
+#   name: flask-docker
+# build:
+#   artifacts:
+#   - image: takuyayone/fastapi-sample
+#     docker:
+#       dockerfile: Dockerfile
+# manifests:
+#   rawYaml:
+#   - deployment.yaml
+# portForward:
+# - resourceType: service
+#   resourceName: dockerfile-image
+#   port: 8000
+
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  - image: takuyayone/fastapi-sample
+    context: ./
+    docker:
+      dockerfile: ./Dockerfile
+  # local:
+  #   push: false
+  #   useBuildkit: true
+deploy:
+  kubectl:
+    manifests:
+    - ./k8s/manifest.yml
